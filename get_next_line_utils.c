@@ -6,15 +6,15 @@
 /*   By: amfarrej <amfarrej@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/21 17:15:02 by amfarrej          #+#    #+#             */
-/*   Updated: 2026/11/22 01:27:19 by amfarrej         ###   ########.fr       */
+/*   Updated: 2026/11/22 16:36:56 by amfarrej         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t ft_strlen(char *s)
+size_t	ft_strlen(char *s)
 {
-	size_t i;
+	size_t	i;
 
 	if (!s)
 		return (0);
@@ -58,11 +58,11 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-static void copy_all(char *dest, char *s1, char *s2)
+static void	copy_all(char *dest, char *s1, char *s2)
 {
-	size_t i;
-	size_t j;
-	
+	size_t	i;
+	size_t	j;
+
 	i = 0;
 	while (s1 && s1[i])
 	{
@@ -78,10 +78,10 @@ static void copy_all(char *dest, char *s1, char *s2)
 	dest[i + j] = '\0';
 }
 
-char *join_free(char *s1, char *s2)
+char	*join_free(char *s1, char *s2)
 {
-	char *str; 
-	
+	char	*str;
+
 	if (!s2)
 	{
 		free(s1);
@@ -89,7 +89,7 @@ char *join_free(char *s1, char *s2)
 	}
 	str = malloc((ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (!str)
-	{	
+	{
 		free(s1);
 		return (NULL);
 	}

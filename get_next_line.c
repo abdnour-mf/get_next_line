@@ -6,44 +6,43 @@
 /*   By: amfarrej <amfarrej@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 22:11:33 by amfarrej          #+#    #+#             */
-/*   Updated: 2026/11/22 01:26:52 by amfarrej         ###   ########.fr       */
+/*   Updated: 2026/11/22 16:36:20 by amfarrej         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char *read_and_fill(int fd, char *remain)
+static char	*read_and_fill(int fd, char *remain)
 {
-	char *buffer;
-	ssize_t bytes_read;
-	
+	char	*buffer;
+	ssize_t	bytes_read;
+
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (free(remain), NULL);
-	bytes_read = 1; // to enter the loop at the first iteration
+	bytes_read = 1;
 	while (!ft_strchr(remain, '\n') && bytes_read > 0)
 	{
-		
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (free(remain), free(buffer), NULL);
 		if (bytes_read == 0)
-			break;
-		buffer[bytes_read] = '\0';	
+			break ;
+		buffer[bytes_read] = '\0';
 		remain = join_free(remain, buffer);
 		if (!remain)
 			return (free(remain), NULL);
 	}
-	free (buffer);
+	free(buffer);
 	return (remain);
 }
 
-static char *extract_line(char *remain)
+static char	*extract_line(char *remain)
 {
-	size_t i;
-	size_t j;
-	char *line;
-	
+	size_t	i;
+	size_t	j;
+	char	*line;
+
 	if (remain[0] == '\0')
 		return (NULL);
 	i = 0;
@@ -64,10 +63,10 @@ static char *extract_line(char *remain)
 	return (line);
 }
 
-static char *update_remain(char *remain)
+static char	*update_remain(char *remain)
 {
-	size_t i;
-	char *rest;
+	size_t	i;
+	char	*rest;
 
 	i = 0;
 	while (remain[i] && remain[i] != '\n')
@@ -86,14 +85,14 @@ static char *update_remain(char *remain)
 
 char	*get_next_line(int fd)
 {
-	static char *remain;
-	char *line;
-	
+	static char	*remain;
+	char		*line;
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		{
-   			free(remain);
-   			return ((remain = NULL), remain);
-		}
+	{
+		free(remain);
+		return ((remain = NULL), remain);
+	}
 	remain = read_and_fill(fd, remain);
 	if (!remain)
 		return (NULL);
@@ -101,7 +100,7 @@ char	*get_next_line(int fd)
 	if (!line)
 	{
 		free(remain);
-   		return ((remain = NULL), remain);
+		return ((remain = NULL), remain);
 	}
 	remain = update_remain(remain);
 	return (line);

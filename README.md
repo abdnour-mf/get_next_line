@@ -12,9 +12,8 @@ This project introduces important concepts in C programming, particularly:
 
 - Static variables and persistent data.
 - File descriptors and the `read()` system call.
-- Dynamic memory allocation and deallocation.
+- Dynamic memory allocation and freeing.
 - String manipulation and memory management.
-- Buffer-based reading and efficient data processing.
 
 ## Features
 
@@ -57,20 +56,11 @@ If EOF is reached without a newline, the remaining content is returned as the fi
 
 This ensures that unread data is never lost between successive calls.
 
-### Why This Algorithm?
-
-The use of a static variable allows the function to preserve its state between calls without requiring the caller to manage the remaining content manually.
-
-Reading in chunks instead of loading the entire file into memory makes the implementation more memory-efficient and allows it to handle files of different sizes.
-
-Separating reading, extraction, and updating into helper functions also makes the code easier to understand, maintain, and debug.
-
 ## Instructions
 
 ### Requirements
 
 - A C compiler (`cc`).
-- `make`.
 - A Unix-like environment.
 
 ### Compilation
@@ -80,30 +70,6 @@ Clone the repository:
 ```bash
 git clone <repository-url>
 cd get_next_line
-```
-
-Compile the project using the Makefile:
-
-```bash
-make
-```
-
-Clean object files:
-
-```bash
-make clean
-```
-
-Remove object files and the compiled library:
-
-```bash
-make fclean
-```
-
-Recompile everything:
-
-```bash
-make re
 ```
 
 ### Compilation with BUFFER_SIZE
@@ -170,7 +136,6 @@ get_next_line/
 ├── get_next_line.c
 ├── get_next_line_utils.c
 ├── get_next_line.h
-├── Makefile
 └── README.md
 ```
 
@@ -198,28 +163,18 @@ Memory management can also be checked using tools such as Valgrind.
 The following resources were useful for understanding the concepts involved in this project:
 
 - [42 Get Next Line Subject](https://cdn.intra.42.fr/pdf/pdf/).
-- [read() — Linux Manual](https://man7.org/linux/man-pages/man2/read.2.html).
-- [malloc() — Linux Manual](https://man7.org/linux/man-pages/man3/malloc.3.html).
-- [free() — Linux Manual](https://man7.org/linux/man-pages/man3/free.3.html).
-- [Static Variables in C](https://en.cppreference.com/w/c/language/static.html).
-- [File Descriptors — Linux Manual](https://man7.org/linux/man-pages/man2/open.2.html).
-
+- [read() - Linux Manual](https://man7.org/linux/man-pages/man2/read.2.html).
+- [Static Variables in C](https://www.geeksforgeeks.org/c/static-variables-in-c/).
+- [File Descriptors - Linux Manual](https://man7.org/linux/man-pages/man2/open.2.html).
+- [system call - kernel](https://medium.com/@shreeparthstorawane23/understanding-system-calls-the-bridge-between-user-and-kernel-b5d60b46c32b)
 ### AI Usage
 
 AI tools were used as learning and debugging assistants throughout the project.
 
 Their use included:
 
-- Clarifying C programming concepts, particularly static variables, pointers, memory allocation, and file descriptors.
+- Clarifying C programming concepts, particularly static variables,memory allocation, and file descriptors.
 - Discussing possible approaches to the reading algorithm.
 - Reviewing code and identifying potential logical errors.
 - Understanding memory management and possible memory leaks.
-- Identifying edge cases and suggesting testing scenarios.
-
-The implementation and problem-solving process were approached as a learning exercise, with the objective of understanding the underlying concepts rather than relying on generated solutions.
-
-## Author
-
-**amfarrej**
-
-42 Network — Computer Science Student
+- Identifying edge cases.
