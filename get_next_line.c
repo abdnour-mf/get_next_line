@@ -6,7 +6,7 @@
 /*   By: amfarrej <amfarrej@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/20 22:11:33 by amfarrej          #+#    #+#             */
-/*   Updated: 2026/11/22 16:36:20 by amfarrej         ###   ########.fr       */
+/*   Updated: 2026/11/23 21:12:41 by amfarrej         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*read_and_fill(int fd, char *remain)
 		buffer[bytes_read] = '\0';
 		remain = join_free(remain, buffer);
 		if (!remain)
-			return (free(remain), NULL);
+			return (free(buffer), NULL);
 	}
 	free(buffer);
 	return (remain);
@@ -105,20 +105,3 @@ char	*get_next_line(int fd)
 	remain = update_remain(remain);
 	return (line);
 }
-
-/* #include <stdio.h>
-#include <fcntl.h>
-
-int main()
-{
-	int fd = open("test.txt", O_CREAT | O_RDONLY, 0644);
-	char *gnl = get_next_line(fd);
-
-	while(gnl)
-	{
-		printf("%s", gnl);
-		free(gnl);
-		gnl = get_next_line(fd);
-	}
-	close(fd);
-} */

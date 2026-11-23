@@ -138,6 +138,16 @@ get_next_line/
 ├── get_next_line.h
 └── README.md
 ```
+# Bonus Structure
+
+```text
+get_next_line/
+│
+├── get_next_line_bonus.c
+├── get_next_line_bonus_utils.c
+├── get_next_line_bonus.h
+└── ...
+```
 
 ## Testing
 
